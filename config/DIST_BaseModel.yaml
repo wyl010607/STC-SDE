@@ -1,0 +1,93 @@
+dataset:
+  data_is_preprocessed: True
+  data_path: data/DIST_DataSet.npz
+  adj_mx_path: data/DIST_corr_adj_mx.npy
+  dwt_path: data/dtw_DIST_distance.npy
+  process_vars_list: [
+      "FIC05.PV",
+      "FIC09.PV",
+      "FIC11.PV",
+      "LIC02.PV",
+      "LIC03.PV",
+      "LIC04.PV",
+      "LIC05.PV",
+      "LIC06.PV",
+      "LIC12.PV",
+  ]
+  control_vars_list: [
+      "FIC05.OP",
+      "FIC09.OP",
+      "FIC11.OP",
+      "LIC02.OP",
+      "LIC03.OP",
+      "LIC04.OP",
+      "LIC05.OP",
+      "LIC06.OP",
+      "LIC12.OP",
+  ]
+  disturb_vars_list: [
+      "TI36.PV",
+      "TI38.PV",
+      "PI03.PV",
+      "FI01.PV",
+      "TI02.PV",
+      "TI03.PV",
+      "FI03.PV",
+      "PI01.PV",
+      "PI02.PV",
+      "TI05.PV",
+      "TI12.PV",
+      "PI06.PV",
+      "TI16.PV",
+      "PI05.PV",
+      "PI08.PV",
+      "TI25.PV",
+      "PI41.PV",
+      "TI21.PV",
+      "FI12.PV",
+  ]
+  timestep: 20
+  history_len: 60
+  forecast_len: 20
+  feature_size: 1
+
+ASTGCN:
+  num_block: 2 # Number of STBlocks
+  kernel_size: 3 # Convolution kernel size
+  num_cheb_filter: 64 # Number of Chebyshev convolution kernels
+  num_time_filter: 64 # Number of time convolution kernels
+  stride: 1 # Stride of time convolution
+  padding: 0
+  conv_type: cheb # Type of convolution kernel
+  K: 2 # Degree of Chebyshev polynomials
+  device: cuda:0
+
+STGODE:
+  K: 2 # Degree of Chebyshev polynomials
+  device: cuda:0
+
+MTGODE:
+  buildA_true: True
+  num_nodes: 37
+  device: cuda:0
+  dropout: 0.3
+  subgraph_size: 20
+  node_dim: 40
+  dilation_exponential: 1
+  conv_channels: 64
+  end_channels: 128
+  seq_in_len: 60 # input sequence length
+  seq_out_len: 20 # output sequence length
+  in_dim: 1 # inputs dimension
+  tanhalpha: 3
+  solver_1: 'euler'
+  time_1: 1.0
+  step_1: 0.25
+  solver_2: 'euler'
+  time_2: 1.0
+  step_2: 0.25
+  alpha: 2.0
+  rtol: 1e-3
+  atol: 1e-4
+  adjoint: False
+  perturb: False

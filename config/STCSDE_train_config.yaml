@@ -1,0 +1,15 @@
+learning_rate: 0.001
+weight_decay: 0.0001
+optimizer: Adam
+seed: 3407
+scaler: StandardScaler
+train_ratio: 0.6
+valid_ratio: 0.2
+batch_size: 128
+device: cuda:0
+early_stop: -1
+trainer: NXDE_Uncertainty_Trainer
+lr_scheduler:
+  name: MultiStepLR
+  milestones: [5, 20, 40, 70]
+  gamma: 0.3

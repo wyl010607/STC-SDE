@@ -1,0 +1,89 @@
+# DIST_DataSet
+dataset:
+  data_is_preprocessed: True
+  data_path: data/DIST_DataSet.npz
+  adj_mx_path: data/DIST_corr_adj_mx.npy
+  process_vars_list: [
+      "FIC05.PV",
+      "FIC09.PV",
+      "FIC11.PV",
+      "LIC02.PV",
+      "LIC03.PV",
+      "LIC04.PV",
+      "LIC05.PV",
+      "LIC06.PV",
+      "LIC12.PV",
+  ]
+  control_vars_list: [
+      "FIC05.OP",
+      "FIC09.OP",
+      "FIC11.OP",
+      "LIC02.OP",
+      "LIC03.OP",
+      "LIC04.OP",
+      "LIC05.OP",
+      "LIC06.OP",
+      "LIC12.OP",
+  ]
+  disturb_vars_list: [
+      "TI36.PV",
+      "TI38.PV",
+      "PI03.PV",
+      "FI01.PV",
+      "TI02.PV",
+      "TI03.PV",
+      "FI03.PV",
+      "PI01.PV",
+      "PI02.PV",
+      "TI05.PV",
+      "TI12.PV",
+      "PI06.PV",
+      "TI16.PV",
+      "PI05.PV",
+      "PI08.PV",
+      "TI25.PV",
+      "PI41.PV",
+      "TI21.PV",
+      "FI12.PV",
+  ]
+  timestep: 20
+  history_len: 60
+  forecast_len: 20
+  feature_size: 1
+  dataset_type: NCDEDataset
+
+NeuralGCDE:
+  type: type1
+  g_type: agc
+  input_dim: 2
+  output_dim: 1
+  embed_dim: 10
+  hid_dim: 64
+  hid_hid_dim: 64
+  num_layers: 3
+  cheb_order: 2
+  adjoint: True
+  device: cuda:0
+
+STCSDE:
+  f_type: linear
+  g_type: agcsde
+  out_type: csde
+  xde_type: sde
+  decoder_type: csde
+  init_type: fc
+  g_dt: 0.25
+  t_dt: 1
+  input_dim: 2
+  output_dim: 1
+  embed_dim: 10
+  hid_dim: 64
+  hid_hid_dim: 64
+  num_layers: 3
+  cheb_order: 3
+  adjoint: False
+  noise_type: diagonal
+  sde_type: ito
+  solver: euler
+  device: cuda:0
+  adaptive_graph: False
