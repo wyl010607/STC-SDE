@@ -6,7 +6,10 @@ import yaml
 import numpy as np
 import torch
 import argparse
+import trainers
+import models
 
+from utils import scaler
 from torch.utils.data import DataLoader
 from dataset.MultiLoopForecastDataset import MultiLoopForecastDataset
 from utils.adj_matrix import get_Adj_matrix
@@ -112,7 +115,7 @@ def main(args):
     Model = getattr(sys.modules["models"], net_name, None)
     if Model is None:
         raise ValueError(f"Model {net_name} is not defined.")
-
+    print(Model)
     # Initialize the model and move it to device
     net_pred = Model(**net_config).to(device)
 
@@ -162,8 +165,7 @@ def main(args):
         data_scaler,
         args.model_save_path,
         args.result_save_dir,
-        args.early_stop,  # Assuming early_stop is a parameter of args
-        args.teacher_forcing,  # Assuming teacher_forcing is a parameter of args
+        train_config['early_stop'],
         **net_config,
     )
     epoch_results = net_pred_trainer.train(train_dataloader, valid_dataloader, **net_config)
@@ -193,7 +195,7 @@ if __name__ == "__main__":
         help="Config path of Trainer",
     )
     parser.add_argument(
-        "--model_name", type=str, default="NeuralCSDE", help="Model name"
+        "--model_name", type=str, default="STCSDE", help="Model name"
     )
     parser.add_argument(
         "--num_epoch", type=int, default=80, help="Epoch number"

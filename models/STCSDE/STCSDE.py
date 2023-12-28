@@ -4,9 +4,9 @@ import numpy as np
 import torchdiffeq
 import torchsde
 
-from Abstract_SDE import Abstract_SDE
-from base_nn import f_linear, f_conv, init_hz_conv, init_hz_fc, G_func_linear
-from AGC_SDE import (
+from .Abstract_SDE import Abstract_SDE
+from .base_nn import f_linear, f_conv, init_hz_conv, init_hz_fc, G_func_linear
+from .AGC_SDE import (
     AGCSDE_Func,
     g_agcsde,
     AGCNODEFunc,
@@ -15,7 +15,7 @@ from AGC_SDE import (
     g_sgcn,
     g_cheb_gcn,
 )
-from CSDE_decoder import (
+from .CSDE_decoder import (
     CSDE_decoder,
     CODE_decoder,
     Out_func_csde,
@@ -23,7 +23,7 @@ from CSDE_decoder import (
     Out_func_conv,
     Out_func_rnn,
 )
-from CSDE_encoder import F_func_hz_CDE, F_func_hz_RNN
+from .CSDE_encoder import F_func_hz_CDE, F_func_hz_RNN
 from utils import controldiffeq
 
 

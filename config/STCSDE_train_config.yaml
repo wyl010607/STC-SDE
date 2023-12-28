@@ -5,7 +5,7 @@ seed: 3407
 scaler: StandardScaler
 train_ratio: 0.6
 valid_ratio: 0.2
-batch_size: 128
+batch_size: 16
 device: cuda:0
 early_stop: -1
 trainer: NXDE_Uncertainty_Trainer

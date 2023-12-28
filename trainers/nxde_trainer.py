@@ -21,7 +21,6 @@ class NXDETrainer(Trainer):
         optimizer,
         lr_scheduler,
         max_epoch_num,
-        max_iter_num,
         scaler,
         model_save_path,
         result_save_dir,
